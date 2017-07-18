@@ -9,6 +9,14 @@ dirname = os.getcwd()
 print_lock = threading.Lock()
 data_q = Queue()
 
+maxcharaR = 75
+maxcharaSR = 250
+maxcharaSSR = 150
+maxsmmN = 50
+maxsmmR = 50
+maxsmmSR = 100
+maxsmmSSR = 150
+
 MaxThread = 40
 
 #image set
@@ -34,7 +42,7 @@ def charaimglist():
         list.append(tmpstr)
         tmpstr = str1 + "2000" + str(index) + "000_03.png"
         list.append(tmpstr)
-    for index in range(11,75):
+    for index in range(11,maxcharaR):
         tmpstr= str1+"200"+str(index)+"000_01.png"
         list.append(tmpstr)
         tmpstr = str1 + "200" + str(index) + "000_02.png"
@@ -56,7 +64,7 @@ def charaimglist():
         list.append(tmpstr)
         tmpstr = str1 + "300" + str(index) + "000_03.png"
         list.append(tmpstr)
-    for index in range(100,250):
+    for index in range(100,maxcharaSR):
         tmpstr= str1+"30"+str(index)+"000_01.png"
         list.append(tmpstr)
         tmpstr = str1 + "30" + str(index) + "000_02.png"
@@ -80,7 +88,7 @@ def charaimglist():
         tmpstr = str1 + "400" + str(index) + "000_03.png"
         list.append(tmpstr)
 
-    for index in range(100,150):
+    for index in range(100,maxcharaSSR):
         tmpstr= str1+"40"+str(index)+"000_01.png"
         list.append(tmpstr)
         tmpstr = str1 + "40" + str(index) + "000_02.png"
@@ -97,7 +105,7 @@ def charazimglist():
     for index in range(1,10):
         tmpstr = str1 + "2000" + str(index) + "000_03.png"
         list.append(tmpstr)
-    for index in range(11,75):
+    for index in range(11,maxcharaR):
         tmpstr = str1 + "200" + str(index) + "000_03.png"
         list.append(tmpstr)
     #super rare 250
@@ -111,7 +119,7 @@ def charazimglist():
         list.append(tmpstr)
         tmpstr = str1 + "300" + str(index) + "000_03.png"
         list.append(tmpstr)
-    for index in range(100,250):
+    for index in range(100,maxcharaSR):
         tmpstr = str1 + "30" + str(index) + "000_02.png"
         list.append(tmpstr)
         tmpstr = str1 + "30" + str(index) + "000_03.png"
@@ -127,7 +135,7 @@ def charazimglist():
         list.append(tmpstr)
         tmpstr = str1 + "400" + str(index) + "000_03.png"
         list.append(tmpstr)
-    for index in range(100,150):
+    for index in range(100,maxcharaSSR):
         tmpstr = str1 + "40" + str(index) + "000_02.png"
         list.append(tmpstr)
         tmpstr = str1 + "40" + str(index) + "000_03.png"
@@ -201,7 +209,7 @@ def questimglist():
     for index in range(1,10):
         tmpstr= str1+"2000"+str(index)+"000.png"
         list.append(tmpstr)
-    for index in range(11,75):
+    for index in range(11,maxcharaR):
         tmpstr= str1+"200"+str(index)+"000.png"
         list.append(tmpstr)
     #super rare 250
@@ -211,7 +219,7 @@ def questimglist():
     for index in range(11,100):
         tmpstr= str1+"300"+str(index)+"000.png"
         list.append(tmpstr)
-    for index in range(100,250):
+    for index in range(100,maxcharaSR):
         tmpstr= str1+"30"+str(index)+"000.png"
         list.append(tmpstr)
     #SSR 150
@@ -223,7 +231,7 @@ def questimglist():
         tmpstr= str1+"400"+str(index)+"000.png"
         list.append(tmpstr)
 
-    for index in range(100,150):
+    for index in range(100,maxcharaSSR):
         tmpstr= str1+"40"+str(index)+"000.png"
         list.append(tmpstr)
 
@@ -236,23 +244,31 @@ def smmimglist():
     for index in range(1,10):
         tmpstr= str1+"1000"+str(index)+"000.png"
         list.append(tmpstr)
-    for index in range(11,50):
+    for index in range(11,maxsmmN):
         tmpstr= str1+"100"+str(index)+"000.png"
         list.append(tmpstr)
     #rare 34 / 50
     for index in range(1,10):
         tmpstr= str1+"2000"+str(index)+"000.png"
         list.append(tmpstr)
-    for index in range(11,50):
+    for index in range(11,maxsmmR):
         tmpstr= str1+"200"+str(index)+"000.png"
         list.append(tmpstr)
     #super rare 55 / 100
     for index in range(1,10):
         tmpstr= str1+"3000"+str(index)+"000.png"
         list.append(tmpstr)
-    for index in range(11,100):
-        tmpstr= str1+"300"+str(index)+"000.png"
-        list.append(tmpstr)
+    if(maxsmmSR <= 100):
+        for index in range(11,maxsmmSR):
+            tmpstr= str1+"300"+str(index)+"000.png"
+            list.append(tmpstr)
+    else:
+        for index in range(11, 100):
+            tmpstr = str1 + "300" + str(index) + "000.png"
+            list.append(tmpstr)
+        for index in range(100, maxsmmSR):
+            tmpstr = str1 + "30" + str(index) + "000.png"
+            list.append(tmpstr)
     #SSR 129/ 150
     for index in range(1,10):
         tmpstr= str1+"4000"+str(index)+"000.png"
@@ -262,7 +278,7 @@ def smmimglist():
         tmpstr= str1+"400"+str(index)+"000.png"
         list.append(tmpstr)
 
-    for index in range(100,150):
+    for index in range(100,maxsmmSSR):
         tmpstr= str1+"40"+str(index)+"000.png"
         list.append(tmpstr)
 
