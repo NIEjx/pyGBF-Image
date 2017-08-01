@@ -8,10 +8,12 @@ import urllib.error
 dirname = os.getcwd()
 print_lock = threading.Lock()
 data_q = Queue()
+
 #limitation
-maxcharaR = 75
+maxcharaR = 100
 maxcharaSR = 250
 maxcharaSSR = 150
+maxcharaExtra = 800
 maxsmmN = 50
 maxsmmR = 50
 maxsmmSR = 100
@@ -19,149 +21,72 @@ maxsmmSSR = 200
 
 MaxThread = 40
 
-#image set
-#character
-# http://game-a.granbluefantasy.jp/assets/img/sp/assets/npc/zoom/3040010000_01.png
-#http://game-a.granbluefantasy.jp/assets/img_light/sp/assets/npc/b/3030007000_01.png
-#class
-#http://game-a1.granbluefantasy.jp/assets/img/sp/assets/leader/job_change/120001_wa_1_01.png
-#http://game-a1.granbluefantasy.jp/assets/img/sp/cjs/job_release_180001_1_c.png
-#quest character
-#http://game-a1.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3040022000.png
-#summon
-#http://game-a.granbluefantasy.jp/assets/img/sp/assets/summon/b/2030011000.png
-def charaimglist():
+def imglist(str1, maxindex):
     list = []
+
     # 3040010000_01
-    str1 = "http://game-a.granbluefantasy.jp/assets/img/sp/assets/npc/zoom/30"
-   #rare 75
-    for index in range(1,10):
-        tmpstr= str1+"2000"+str(index)+"000_01.png"
-        list.append(tmpstr)
-        tmpstr = str1 + "2000" + str(index) + "000_02.png"
-        list.append(tmpstr)
-        tmpstr = str1 + "2000" + str(index) + "000_03.png"
-        list.append(tmpstr)
-    if(maxcharaR <= 100):
-        for index in range(11,maxcharaR):
-            tmpstr= str1+"200"+str(index)+"000_01.png"
+    if(maxindex < 10):
+        for index in range(1, maxindex):
+            tmpstr = str1 + "000" + str(index) + "000_01.png"
             list.append(tmpstr)
-            tmpstr = str1 + "200" + str(index) + "000_02.png"
+            tmpstr = str1 + "000" + str(index) + "000_02.png"
             list.append(tmpstr)
-            tmpstr = str1 + "200" + str(index) + "000_03.png"
+            tmpstr = str1 + "000" + str(index) + "000_03.png"
             list.append(tmpstr)
     else:
-        for index in range(11,100):
-            tmpstr= str1+"200"+str(index)+"000_01.png"
+        for index in range(1,10):
+            tmpstr = str1 + "000" + str(index) + "000_01.png"
             list.append(tmpstr)
-            tmpstr = str1 + "200" + str(index) + "000_02.png"
+            tmpstr = str1 + "000" + str(index) + "000_02.png"
             list.append(tmpstr)
-            tmpstr = str1 + "200" + str(index) + "000_03.png"
+            tmpstr = str1 + "000" + str(index) + "000_03.png"
             list.append(tmpstr)
-        for index in range(100,maxcharaR):
-            tmpstr= str1+"20"+str(index)+"000_01.png"
-            list.append(tmpstr)
-            tmpstr = str1 + "20" + str(index) + "000_02.png"
-            list.append(tmpstr)
-            tmpstr = str1 + "20" + str(index) + "000_03.png"
-            list.append(tmpstr)
-    #super rare 250
-    for index in range(1,10):
-        tmpstr= str1+"3000"+str(index)+"000_01.png"
-        list.append(tmpstr)
-        tmpstr = str1 + "3000" + str(index) + "000_02.png"
-        list.append(tmpstr)
-        tmpstr = str1 + "3000" + str(index) + "000_03.png"
-        list.append(tmpstr)
-    for index in range(11,100):
-        tmpstr= str1+"300"+str(index)+"000_01.png"
-        list.append(tmpstr)
-        tmpstr = str1 + "300" + str(index) + "000_02.png"
-        list.append(tmpstr)
-        tmpstr = str1 + "300" + str(index) + "000_03.png"
-        list.append(tmpstr)
-    for index in range(100,maxcharaSR):
-        tmpstr= str1+"30"+str(index)+"000_01.png"
-        list.append(tmpstr)
-        tmpstr = str1 + "30" + str(index) + "000_02.png"
-        list.append(tmpstr)
-        tmpstr = str1 + "30" + str(index) + "000_03.png"
-        list.append(tmpstr)
-    #SSR 150
-    for index in range(1,10):
-        tmpstr= str1+"4000"+str(index)+"000_01.png"
-        list.append(tmpstr)
-        tmpstr = str1 + "4000" + str(index) + "000_02.png"
-        list.append(tmpstr)
-        tmpstr = str1 + "4000" + str(index) + "000_03.png"
-        list.append(tmpstr)
-    for index in range(11,100):
-        tmpstr= str1+"400"+str(index)+"000_01.png"
-        list.append(tmpstr)
-        tmpstr = str1 + "400" + str(index) + "000_02.png"
-        list.append(tmpstr)
-        tmpstr = str1 + "400" + str(index) + "000_03.png"
-        list.append(tmpstr)
-    for index in range(100,maxcharaSSR):
-        tmpstr= str1+"40"+str(index)+"000_01.png"
-        list.append(tmpstr)
-        tmpstr = str1 + "40" + str(index) + "000_02.png"
-        list.append(tmpstr)
-        tmpstr = str1 + "40" + str(index) + "000_03.png"
-        list.append(tmpstr)
+        if(maxindex < 100):
+            for index in range(11,maxcharaR):
+                tmpstr = str1 + "00" + str(index) +"000_01.png"
+                list.append(tmpstr)
+                tmpstr = str1 + "00" + str(index) + "000_02.png"
+                list.append(tmpstr)
+                tmpstr = str1 + "00" + str(index) + "000_03.png"
+                list.append(tmpstr)
+        else:
+            for index in range(11,100):
+                tmpstr = str1 + "00" + str(index) + "000_01.png"
+                list.append(tmpstr)
+                tmpstr = str1 + "00" + str(index) + "000_02.png"
+                list.append(tmpstr)
+                tmpstr = str1 + "00" + str(index) + "000_03.png"
+                list.append(tmpstr)
+            for index in range(100,maxcharaR):
+                tmpstr = str1 + "0" + str(index) + "000_01.png"
+                list.append(tmpstr)
+                tmpstr = str1 + "0" + str(index) + "000_02.png"
+                list.append(tmpstr)
+                tmpstr = str1 + "0" + str(index) + "000_03.png"
+                list.append(tmpstr)
     return list
-#zoom
-def charazimglist():
+def imglist2(str1, maxindex):
     list = []
-    # 3040010000_01
-    str1 = "http://game-a.granbluefantasy.jp/assets/img/sp/assets/npc/b/30"
-    #rare 75
-    for index in range(1,10):
-        tmpstr = str1 + "2000" + str(index) + "000_03.png"
-        list.append(tmpstr)
-    if(maxcharaR <= 100):
-        for index in range(11,maxcharaR):
-            tmpstr = str1 + "200" + str(index) + "000_03.png"
+    # 3040010000
+    if(maxindex < 10):
+        for index in range(1, maxindex):
+            tmpstr = str1 + "000" + str(index) + "000.png"
             list.append(tmpstr)
     else:
-        for index in range(11,100):
-            tmpstr = str1 + "200" + str(index) + "000_03.png"
+        for index in range(1,10):
+            tmpstr = str1 + "000" + str(index) + "000.png"
             list.append(tmpstr)
-        for index in range(100,maxcharaR):
-            tmpstr = str1 + "20" + str(index) + "000_03.png"
-            list.append(tmpstr)
-    #super rare 250
-    for index in range(1,10):
-        tmpstr = str1 + "3000" + str(index) + "000_02.png"
-        list.append(tmpstr)
-        tmpstr = str1 + "3000" + str(index) + "000_03.png"
-        list.append(tmpstr)
-    for index in range(11,100):
-        tmpstr = str1 + "300" + str(index) + "000_02.png"
-        list.append(tmpstr)
-        tmpstr = str1 + "300" + str(index) + "000_03.png"
-        list.append(tmpstr)
-    for index in range(100,maxcharaSR):
-        tmpstr = str1 + "30" + str(index) + "000_02.png"
-        list.append(tmpstr)
-        tmpstr = str1 + "30" + str(index) + "000_03.png"
-        list.append(tmpstr)
-    #SSR 150
-    for index in range(1,10):
-        tmpstr = str1 + "4000" + str(index) + "000_02.png"
-        list.append(tmpstr)
-        tmpstr = str1 + "4000" + str(index) + "000_03.png"
-        list.append(tmpstr)
-    for index in range(11,100):
-        tmpstr = str1 + "400" + str(index) + "000_02.png"
-        list.append(tmpstr)
-        tmpstr = str1 + "400" + str(index) + "000_03.png"
-        list.append(tmpstr)
-    for index in range(100,maxcharaSSR):
-        tmpstr = str1 + "40" + str(index) + "000_02.png"
-        list.append(tmpstr)
-        tmpstr = str1 + "40" + str(index) + "000_03.png"
-        list.append(tmpstr)
+        if(maxindex < 100):
+            for index in range(11,maxcharaR):
+                tmpstr = str1 + "00" + str(index) +"000.png"
+                list.append(tmpstr)
+        else:
+            for index in range(11,100):
+                tmpstr = str1 + "00" + str(index) + "000.png"
+                list.append(tmpstr)
+            for index in range(100,maxcharaR):
+                tmpstr = str1 + "0" + str(index) + "000.png"
+                list.append(tmpstr)
     return list
 def classimglist():
     list = []
@@ -223,122 +148,7 @@ def classimglist():
         tmpStr = str2 + iStr[0:6] + "_1_e.png"
         list.append(tmpStr)
     return list
-def questimglist():
-    list = []
-    # 3040010000_01
-    str1 = "http://game-a1.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/30"
-    #rare 75
-    for index in range(1,10):
-        tmpstr= str1+"2000"+str(index)+"000.png"
-        list.append(tmpstr)
-    if(maxcharaR<=100):
-        for index in range(11,maxcharaR):
-            tmpstr= str1+"200"+str(index)+"000.png"
-            list.append(tmpstr)
-    else:
-        for index in range(11,100):
-            tmpstr= str1+"200"+str(index)+"000.png"
-            list.append(tmpstr)
-        for index in range(100,maxcharaR):
-            tmpstr= str1+"20"+str(index)+"000.png"
-            list.append(tmpstr)
-    #super rare 250
-    for index in range(1,10):
-        tmpstr= str1+"3000"+str(index)+"000.png"
-        list.append(tmpstr)
-    for index in range(11,100):
-        tmpstr= str1+"300"+str(index)+"000.png"
-        list.append(tmpstr)
-    for index in range(100,maxcharaSR):
-        tmpstr= str1+"30"+str(index)+"000.png"
-        list.append(tmpstr)
-    #SSR 150
-    for index in range(1,10):
-        tmpstr= str1+"4000"+str(index)+"000.png"
-        list.append(tmpstr)
 
-    for index in range(11,100):
-        tmpstr= str1+"400"+str(index)+"000.png"
-        list.append(tmpstr)
-
-    for index in range(100,maxcharaSSR):
-        tmpstr= str1+"40"+str(index)+"000.png"
-        list.append(tmpstr)
-
-    return list
-def smmimglist():
-    list = []
-    # 3040010000_01
-    str1 = "http://game-a.granbluefantasy.jp/assets/img/sp/assets/summon/b/20"
-    #normal 9 / 50
-    for index in range(1,10):
-        tmpstr= str1+"1000"+str(index)+"000.png"
-        list.append(tmpstr)
-    if(maxsmmN <= 100):
-        for index in range(11,maxsmmN):
-            tmpstr= str1+"100"+str(index)+"000.png"
-            list.append(tmpstr)
-    else:
-        for index in range(11,100):
-            tmpstr= str1+"100"+str(index)+"000.png"
-            list.append(tmpstr)
-        for index in range(100,maxsmmN):
-            tmpstr= str1+"10"+str(index)+"000.png"
-            list.append(tmpstr)
-    #rare 34 / 50
-    for index in range(1,10):
-        tmpstr= str1+"2000"+str(index)+"000.png"
-        list.append(tmpstr)
-    if(maxsmmR<=100):
-        for index in range(11,maxsmmR):
-            tmpstr= str1+"200"+str(index)+"000.png"
-            list.append(tmpstr)
-    else:
-        for index in range(11, 100):
-            tmpstr = str1 + "200" + str(index) + "000.png"
-            list.append(tmpstr)
-        for index in range(100, maxsmmR):
-            tmpstr = str1 + "20" + str(index) + "000.png"
-            list.append(tmpstr)
-    #super rare 55 / 100
-    for index in range(1,10):
-        tmpstr= str1+"3000"+str(index)+"000.png"
-        list.append(tmpstr)
-    if(maxsmmSR <= 100):
-        for index in range(11,maxsmmSR):
-            tmpstr= str1+"300"+str(index)+"000.png"
-            list.append(tmpstr)
-    else:
-        for index in range(11, 100):
-            tmpstr = str1 + "300" + str(index) + "000.png"
-            list.append(tmpstr)
-        for index in range(100, maxsmmSR):
-            tmpstr = str1 + "30" + str(index) + "000.png"
-            list.append(tmpstr)
-    #SSR 129/ 150
-    for index in range(1,10):
-        tmpstr= str1+"4000"+str(index)+"000.png"
-        list.append(tmpstr)
-
-    for index in range(11,100):
-        tmpstr= str1+"400"+str(index)+"000.png"
-        list.append(tmpstr)
-
-    for index in range(100,maxsmmSSR):
-        tmpstr= str1+"40"+str(index)+"000.png"
-        list.append(tmpstr)
-
-    return list
-# def classimglist():
-#     list = []
-#     str1 = "http://game-a1.granbluefantasy.jp/assets/img/sp/assets/leader/job_change/"
-#     str2 = "http://game-a1.granbluefantasy.jp/assets/img/sp/cjs/job_release_"
-#     #change class
-#     for iStr in tmplist:
-#         # class man
-#         tmpStr= str1+iStr+"0_01.png"
-#         list.append(tmpStr)
-#     return list
 def mkdir(path):
     tmppath = os.getcwd()+"\\"+path
     try:
@@ -346,12 +156,8 @@ def mkdir(path):
 
     except:
         pass
-    #     if(OSError.errno ==17):
-    #         pass
-    #     else:
-    #         print(OSError.errno)
-    #         sys.exit()
     return tmppath
+
 class imgName:
     url = ""
     dir = ""
@@ -359,25 +165,29 @@ class imgName:
         self.url = url
         self.dir = dir
 
-
 def saveImg(imgData):
     time.sleep(0.1)
     with print_lock:
         imgName = imgData.url.split('/')[-1]
-        try:
-            raw = urllib.request.urlopen(imgData.url)
-            img = raw.read()
-            raw.close()
-            with open(imgData.dir+"\\"+imgName,'wb') as file:
-                file.write(img)
-        except:
-            print("error:",imgName," not exist")
+        if( os.path.isfile(imgData.dir+"\\"+imgName) == False):
+            try:
+                raw = urllib.request.urlopen(imgData.url)
+                img = raw.read()
+                raw.close()
+                with open(imgData.dir+"\\"+imgName,'wb') as file:
+                    file.write(img)
+            except:
+                print("error:",imgName," in dir:",imgData.dir," not exist")
+                pass
+        else:
             pass
+
 def worker():
     while True:
         imgData = data_q.get()
         saveImg(imgData)
         data_q.task_done()
+
 def main():
     #socket.setdefaulttimeout(10)
 
@@ -387,32 +197,96 @@ def main():
         t.start()
     start = time.time()
 
-    simglist = charaimglist()
-    dirname = mkdir("chara")
+    str1 = "http://game-a.granbluefantasy.jp/assets/img/sp/assets/npc/zoom/30"
+    simglist = imglist(str1+"2",maxcharaR)
+    dirname = mkdir("chara\\r")
     for iimg in simglist:
         data_q.put(imgName(iimg, dirname))
     simglist.clear()
 
-    simglist = charazimglist()
-    dirname = mkdir("zoom")
+    simglist = imglist(str1+"3",maxcharaSR)
+    dirname = mkdir("chara\\sr")
+    for iimg in simglist:
+        data_q.put(imgName(iimg, dirname))
+    simglist.clear()
+
+    simglist = imglist(str1+"4",maxcharaSSR)
+    dirname = mkdir("chara\\ssr")
+    for iimg in simglist:
+        data_q.put(imgName(iimg, dirname))
+    simglist.clear()
+
+    str1 = "http://game-a.granbluefantasy.jp/assets/img_light/sp/assets/npc/b/30"
+    simglist = imglist(str1 + "2", maxcharaR)
+    dirname = mkdir("zoom\\r")
+    for iimg in simglist:
+        data_q.put(imgName(iimg, dirname))
+    simglist.clear()
+
+    simglist = imglist(str1 + "3", maxcharaSR)
+    dirname = mkdir("zoom\\sr")
+    for iimg in simglist:
+        data_q.put(imgName(iimg, dirname))
+    simglist.clear()
+
+    simglist = imglist(str1 + "4", maxcharaSSR)
+    dirname = mkdir("zoom\\ssr")
+    for iimg in simglist:
+        data_q.put(imgName(iimg, dirname))
+    simglist.clear()
+
+    str1 = "http://game-a1.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3"
+    simglist = imglist2(str1 + "02", maxcharaR)
+    dirname = mkdir("quest\\r")
+    for iimg in simglist:
+        data_q.put(imgName(iimg, dirname))
+    simglist.clear()
+
+    simglist = imglist2(str1 + "03", maxcharaSR)
+    dirname = mkdir("quest\\sr")
+    for iimg in simglist:
+        data_q.put(imgName(iimg, dirname))
+    simglist.clear()
+
+    simglist = imglist2(str1 + "04", maxcharaSSR)
+    dirname = mkdir("quest\\ssr")
+    for iimg in simglist:
+        data_q.put(imgName(iimg, dirname))
+    simglist.clear()
+
+    simglist = imglist2(str1 + "99", maxcharaExtra)
+    dirname = mkdir("quest\\extra")
+    for iimg in simglist:
+        data_q.put(imgName(iimg, dirname))
+    simglist.clear()
+
+    str1 = "http://game-a.granbluefantasy.jp/assets/img/sp/assets/summon/b/20"
+    simglist = imglist2(str1 + "1", maxsmmN)
+    dirname = mkdir("summon\\n")
+    for iimg in simglist:
+        data_q.put(imgName(iimg, dirname))
+    simglist.clear()
+
+    simglist = imglist2(str1 + "2", maxsmmR)
+    dirname = mkdir("summon\\r")
+    for iimg in simglist:
+        data_q.put(imgName(iimg, dirname))
+    simglist.clear()
+
+    simglist = imglist2(str1 + "3", maxsmmSR)
+    dirname = mkdir("summon\\sr")
+    for iimg in simglist:
+        data_q.put(imgName(iimg, dirname))
+    simglist.clear()
+
+    simglist = imglist2(str1 + "4", maxsmmSSR)
+    dirname = mkdir("summon\\ssr")
     for iimg in simglist:
         data_q.put(imgName(iimg, dirname))
     simglist.clear()
 
     simglist = classimglist()
     dirname = mkdir("class")
-    for iimg in simglist:
-        data_q.put(imgName(iimg, dirname))
-    simglist.clear()
-
-    simglist = questimglist()
-    dirname = mkdir("quest")
-    for iimg in simglist:
-        data_q.put(imgName(iimg, dirname))
-    simglist.clear()
-
-    simglist = smmimglist()
-    dirname = mkdir("summon")
     for iimg in simglist:
         data_q.put(imgName(iimg, dirname))
     simglist.clear()
@@ -425,3 +299,15 @@ def main():
 if __name__ == '__main__':
   main()
 
+#appendix
+#image set
+#character
+# http://game-a.granbluefantasy.jp/assets/img/sp/assets/npc/zoom/3040010000_01.png
+#http://game-a.granbluefantasy.jp/assets/img_light/sp/assets/npc/b/3030007000_01.png
+#class
+#http://game-a1.granbluefantasy.jp/assets/img/sp/assets/leader/job_change/120001_wa_1_01.png
+#http://game-a1.granbluefantasy.jp/assets/img/sp/cjs/job_release_180001_1_c.png
+#quest character 2 3 4 99
+#http://game-a1.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3040022000.png
+#summon
+#http://game-a.granbluefantasy.jp/assets/img/sp/assets/summon/b/2030011000.png
