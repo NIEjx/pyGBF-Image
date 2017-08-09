@@ -94,6 +94,38 @@ def imglist3(groupid):
         # url, dir, id, groupid, suffix = False
         list.append(imgName(tmpstr, index, groupid, 3))
     return list
+def exlist():
+    list = []
+    tmpsrc = ["http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_muffler.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_muffler_laugh.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000muffler_laugh2.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_muffler_sad.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_muffler_suddenly.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_muffler_surprise.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_muffler2.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_race_angry.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_race_laugh.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_race_sad.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_race_suddenly.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_race_surprise.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_summer.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_summer_joy.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_summer_laugh.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_summer_sad.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_summer_surprise.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_summer2.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_swim.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_race.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_race_angry.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_race_laugh.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_race_sad.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_race_suddenly.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_race_surprise.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_race_cutin.png"]
+    n = 0
+    for i in tmpsrc:
+        list.append(imgName(i,-1,7,2))
+    return list
 
 def classimglist():
     list = []
@@ -276,44 +308,48 @@ def main():
     start = time.time()
     simglist = []
     # chara[R/SR/SSR/skin] quest[r/sr/ssr/extra] summon[n/r/sr/ssr] zoom[r/sr/ssr/skin] mypage[r/sr/ssr/skin] class cover
+    #character image
     for index in range(0,4):
         simglist = imglist(index)
         for iimg in simglist:
             data_q.put(iimg)
         simglist.clear()
-
+    # quest image with expression
     for index in range(4,8):
         simglist = imglist3(index)
         for iimg in simglist:
             data_q.put(iimg)
         simglist.clear()
-
+    # summon stone
     for index in range(8,12):
         simglist = imglist2(index)
         for iimg in simglist:
             data_q.put(iimg)
         simglist.clear()
-
+    # character zoom image & mypage image
     for index in range(12,20):
         simglist = imglist(index)
         for iimg in simglist:
             data_q.put(iimg)
         simglist.clear()
-
+    #class revolution
     simglist = classimglist()
     for iimg in simglist:
         data_q.put(iimg)
     simglist.clear()
-
+    #mypage class
     simglist = coverimglist()
+    for iimg in simglist:
+        data_q.put(iimg)
+    simglist.clear()
+    #quest extra
+    simglist = exlist()
     for iimg in simglist:
         data_q.put(iimg)
     simglist.clear()
 
     data_q.join()
     print("entire job took:", time.time()-start)
-
-
 
 
 if __name__ == '__main__':
