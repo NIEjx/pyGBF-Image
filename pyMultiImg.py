@@ -42,13 +42,20 @@ groupdir = ["chara\\R","chara\\SR","chara\\SSR","chara\\Skin",
             "zoom\\R","zoom\\SR","zoom\\SSR","zoom\\Skin",
             "cover\\R","cover\\SR","cover\\SSR","cover\\Skin",
             "class","cover\\class"]
+#quest extra needs big step
+groupstep = [20,20,20,20,
+             20,20,20,50,
+             20,20,20,20,
+             20,20,20,20,
+             20,20,20,20,
+             0,0]
 
 MaxThread = 40
 
 def imglist(groupid):
     list = []
     # 3040001000_01
-    for index in range(groupstack[groupid], groupstack[groupid]+20):
+    for index in range(groupstack[groupid], groupstack[groupid]+groupstep[groupid]):
         tmpstr = groupstr[groupid] + str(index).zfill(4) + "000_01.png"
         #url, dir, id, groupid, suffix = False
         list.append(imgName(tmpstr,index,groupid,1)  )
@@ -60,7 +67,7 @@ def imglist(groupid):
 def imglist2(groupid):
     list = []
     # 3040001000
-    for index in range(groupstack[groupid], groupstack[groupid]+20):
+    for index in range(groupstack[groupid], groupstack[groupid]+groupstep[groupid]):
         tmpstr = groupstr[groupid] + str(index).zfill(4) + "000.png"
         # url, dir, id, groupid, suffix = False
         list.append(imgName(tmpstr, index, groupid, 2))
@@ -68,7 +75,7 @@ def imglist2(groupid):
 def imglist3(groupid):
     list = []
     # 3040001000
-    for index in range(groupstack[groupid], groupstack[groupid]+20):
+    for index in range(groupstack[groupid], groupstack[groupid]+groupstep[groupid]):
         tmpstr = groupstr[groupid] + str(index).zfill(4) + "000.png"
         # url, dir, id, groupid, suffix = False
         list.append(imgName(tmpstr, index, groupid, 3))
@@ -257,13 +264,14 @@ def saveImg(imgData):
     with print_lock:
         imgName = imgData.url.split('/')[-1]
         dir = dirname+"\\"+groupdir[imgData.groupid]
+        print("downloading:"+imgName)
         try:
             raw = urllib.request.urlopen(imgData.url)
             img = raw.read()
             raw.close()
             #update logic
             if(imgData.id>groupstack[imgData.groupid]):
-                groupstack[imgData.groupid] += 20
+                groupstack[imgData.groupid] += groupstep[imgData.groupid]
                 simglist = []
                 if(imgData.suffix == 1):
                     simglist = imglist(imgData.groupid)
@@ -273,6 +281,7 @@ def saveImg(imgData):
                     simglist = imglist3(imgData.groupid)
                 else:
                     print("wrong suffix")
+
                 for iimg in simglist:
                     data_q.put(iimg)
                 simglist.clear()
