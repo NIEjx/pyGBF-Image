@@ -1,11 +1,10 @@
-# GBF-Image
-build in python 3.7
-
-Game resourse downloader
-
-characters
-class
-summmons
+GBF-Image
+============
+* Language python 3.7
+* Game resourse downloader
+**  characters
+**  class
+**  summmons
 quest(with emotion suffix)
 skin
 mypage
