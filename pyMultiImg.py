@@ -1,3 +1,4 @@
+# 批量下载GBF游戏资源
 from queue import Queue
 import os
 import time
