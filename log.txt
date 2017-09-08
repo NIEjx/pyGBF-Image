@@ -1,0 +1,2 @@
+chara[R / SR / SSR / skin] quest[r / sr / ssr / extra] summon[n / r / sr / ssr] zoom[r / sr / ssr / skin] mypage[r / sr / ssr / skin] class cover
+70,204,130,53,70,207,132,752,12,35,80,229,70,204,130,53,70,204,130,53,0,0,

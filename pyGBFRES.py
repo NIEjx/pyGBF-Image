@@ -5,6 +5,7 @@ import time
 import threading
 import urllib.request
 import urllib.error
+import datetime
 
 dirname = os.getcwd()
 print_lock = threading.Lock()
@@ -14,6 +15,9 @@ data_q = Queue()
 groupstack = [0,0,0,0,0,0,0,0,0,0,
               0,0,0,0,0,0,0,0,0,0,
               0,0]
+grouptop = [0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,
+            0,0]
 groupstr = ["http://game-a.granbluefantasy.jp/assets/img/sp/assets/npc/b/302",
             "http://game-a.granbluefantasy.jp/assets/img/sp/assets/npc/b/303",
             "http://game-a.granbluefantasy.jp/assets/img/sp/assets/npc/b/304",
@@ -286,6 +290,8 @@ def saveImg(imgData):
                 for iimg in simglist:
                     data_q.put(iimg)
                 simglist.clear()
+            if(imgData.id>grouptop[imgData.groupid]):
+                grouptop[imgData.groupid] = imgData.id
             #save logic
             if(os.path.isfile(dir + "\\" + imgName) == False):
                 with open(dir+"\\"+imgName,'wb') as file:
@@ -306,6 +312,21 @@ def worker():
 
 def main():
     #socket.setdefaulttimeout(10)
+    try:
+        logdata = ""
+        with open("log.txt") as logfile:
+            lines = logfile.readlines()
+            logdata = lines[1]
+        if (logdata != ""):
+            data = logdata.split(',')
+            numgroup = len(groupstack) + 1
+            if (len(data) == numgroup):
+                print("download start from latest")
+                for i in range(0, numgroup):
+                    groupstack[i] = int(data[i])
+                groupstack[7]-=50
+    except:
+        pass
 
     for x in range(MaxThread):
         t = threading.Thread(target = worker)
@@ -318,7 +339,7 @@ def main():
     start = time.time()
     simglist = []
     # chara[R/SR/SSR/skin] quest[r/sr/ssr/extra] summon[n/r/sr/ssr] zoom[r/sr/ssr/skin] mypage[r/sr/ssr/skin] class cover
-    #character image
+    # character image
     for index in range(0,4):
         simglist = imglist(index)
         for iimg in simglist:
@@ -342,24 +363,31 @@ def main():
         for iimg in simglist:
             data_q.put(iimg)
         simglist.clear()
-    #class revolution
+    # class revolution
     simglist = classimglist()
     for iimg in simglist:
         data_q.put(iimg)
     simglist.clear()
-    #mypage class
+    # mypage class
     simglist = coverimglist()
     for iimg in simglist:
         data_q.put(iimg)
     simglist.clear()
-    #quest extra
+    # quest extra
     simglist = exlist()
     for iimg in simglist:
         data_q.put(iimg)
     simglist.clear()
-
     data_q.join()
     print("entire job took:", time.time()-start)
+    # today = str(datetime.date.today())
+    with open("log.txt", "w", encoding='utf-8') as logfile:
+        istr = "chara[R / SR / SSR / skin] quest[r / sr / ssr / extra] summon[n / r / sr / ssr] zoom[r / sr / ssr / skin] mypage[r / sr / ssr / skin] class cover\n"
+        logfile.write(istr)
+        for ilog in grouptop:
+            istr = str(ilog)+","
+            logfile.write(istr)
+        logfile.write("\n")
 
 
 if __name__ == '__main__':
