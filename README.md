@@ -1,6 +1,7 @@
 GBF-Image
 ========================
 update: 2017/09/09
+
 This is a downloader for GranBlue Fantasy(Cygames Inc.)
 * Language python 3.7
 * Require: BeautifulSoup4
