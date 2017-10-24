@@ -110,7 +110,7 @@ def exlist():
     list = []
     tmpsrc = ["http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_muffler.png",
               "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_muffler_laugh.png",
-              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000muffler_laugh2.png",
+              "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_muffler_laugh2.png",
               "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_muffler_sad.png",
               "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_muffler_suddenly.png",
               "http://game-a.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3050000000_muffler_surprise.png",
@@ -166,7 +166,8 @@ def classimglist():
                '210201_kt_','220201_kt_',
                '230201_sw_','240201_gu_',
                '250201_wa_','270201_mc_',
-               '260201_kn_')
+               '260201_kn_','200201_kn_',
+               '280201_kn_')
 
     #change class
     for iStr in tmplist:
@@ -227,7 +228,9 @@ def coverimglist():
                '250201_wa_','270201_mc_',
                '260201_kn_','165001_me_',
                '185001_mc_','125001_wa_',
-               '310001_sw_','360001_me_')
+               '310001_sw_','360001_me_',
+               '310101_sw_','200201_kn_',
+               '280201_kn_')
 
     #change class
     for iStr in tmplist:
