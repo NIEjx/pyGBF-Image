@@ -24,5 +24,5 @@ This is a downloader for GranBlue Fantasy(Cygames Inc.)
 * v2 split index control easier to reach
 * v1 downloader
 ##### Appendix
-http://gran-img-finder.herokuapp.com/
+http://niejx.com/gbfimage
 * a website powered by JEANNE which for game resource search
