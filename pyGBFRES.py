@@ -11,13 +11,13 @@ dirname = os.getcwd()
 print_lock = threading.Lock()
 data_q = Queue()
 
-# chara[R/SR/SSR/skin] quest[r/sr/ssr/extra] summon[n/r/sr/ssr] zoom[r/sr/ssr/skin] mypage[r/sr/ssr/skin] class cover
+# chara[R/SR/SSR/skin] quest[r/sr/ssr/extra] summon[n/r/sr/ssr] zoom[r/sr/ssr/skin] mypage[r/sr/ssr/skin] class cover bg chara[extra] zoom[extra]
 groupstack = [0,0,0,0,0,0,0,0,0,0,
               0,0,0,0,0,0,0,0,0,0,
-              0,0]
+              0,0,0,0,0]
 grouptop = [0,0,0,0,0,0,0,0,0,0,
             0,0,0,0,0,0,0,0,0,0,
-            0,0]
+            0,0,0,0,0]
 groupstr = ["http://game-a.granbluefantasy.jp/assets/img/sp/assets/npc/b/302",
             "http://game-a.granbluefantasy.jp/assets/img/sp/assets/npc/b/303",
             "http://game-a.granbluefantasy.jp/assets/img/sp/assets/npc/b/304",
@@ -39,21 +39,26 @@ groupstr = ["http://game-a.granbluefantasy.jp/assets/img/sp/assets/npc/b/302",
             "http://game-a1.granbluefantasy.jp/assets/img/sp/assets/npc/my/304",
             "http://game-a1.granbluefantasy.jp/assets/img/sp/assets/npc/my/371",
             "class",
-            "classcover"]
+            "classcover",
+            "http://game-a.granbluefantasy.jp/assets/img/sp/top/bg/million/bg_",
+            "http://game-a.granbluefantasy.jp/assets/img/sp/assets/npc/b/399",
+            "http://game-a.granbluefantasy.jp/assets/img/sp/assets/npc/zoom/399"]
 # chara[R/SR/SSR/skin] quest[r/sr/ssr/extra] summon[n/r/sr/ssr] zoom[r/sr/ssr/skin] mypage[r/sr/ssr/skin] class cover
 groupdir = ["chara\\R","chara\\SR","chara\\SSR","chara\\Skin",
             "quest\\R","quest\\SR","quest\\SSR","quest\\Extra",
             "summon\\N","summon\\R","summon\\SR","summon\\SSR",
             "zoom\\R","zoom\\SR","zoom\\SSR","zoom\\Skin",
             "cover\\R","cover\\SR","cover\\SSR","cover\\Skin",
-            "class","cover\\class"]
+            "class","cover\\class","bg","chara\\extra",
+            "zoom\\extra"]
 #quest extra needs big step
 groupstep = [20,20,20,20,
              20,20,20,50,
              20,20,20,20,
              20,20,20,20,
              20,20,20,20,
-             0,0]
+             0,0,50,100,
+             100]
 
 MaxThread = 40
 
@@ -61,6 +66,9 @@ def imglist(groupid):
     list = []
     # 3040001000_01
     for index in range(groupstack[groupid], groupstack[groupid]+groupstep[groupid]):
+        tmpstr = groupstr[groupid] + str(index).zfill(4) + "000.png"
+        #url, dir, id, groupid, suffix = False
+        list.append(imgName(tmpstr,index,groupid,1)  )
         tmpstr = groupstr[groupid] + str(index).zfill(4) + "000_01.png"
         #url, dir, id, groupid, suffix = False
         list.append(imgName(tmpstr,index,groupid,1)  )
@@ -105,6 +113,26 @@ def imglist3(groupid):
         tmpstr = groupstr[groupid] + str(index).zfill(4) + "000_suddenly.png"
         # url, dir, id, groupid, suffix = False
         list.append(imgName(tmpstr, index, groupid, 3))
+        tmpstr = groupstr[groupid] + str(index).zfill(4) + "000_shy.png"
+        # url, dir, id, groupid, suffix = False
+        list.append(imgName(tmpstr, index, groupid, 3))
+        tmpstr = groupstr[groupid] + str(index).zfill(4) + "000_01.png"
+        # url, dir, id, groupid, suffix = False
+        list.append(imgName(tmpstr, index, groupid, 3))
+        tmpstr = groupstr[groupid] + str(index).zfill(4) + "000_02.png"
+        # url, dir, id, groupid, suffix = False
+        list.append(imgName(tmpstr, index, groupid, 3))
+        tmpstr = groupstr[groupid] + str(index).zfill(4) + "000_03.png"
+        # url, dir, id, groupid, suffix = False
+        list.append(imgName(tmpstr, index, groupid, 3))
+    return list
+def bglist(groupid):
+    list = []
+    # bg_xx.jpg
+    for index in range(groupstack[groupid], groupstack[groupid]+groupstep[groupid]):
+        tmpstr = groupstr[groupid] + str(index) + ".jpg"
+        # url, dir, id, groupid, suffix = False
+        list.append(imgName(tmpstr, index, groupid, 4))
     return list
 def exlist():
     list = []
@@ -241,6 +269,15 @@ def coverimglist():
         tmpStr = str1 + iStr + "1_01.png"
         list.append(imgName(tmpStr, -1, 21, 2))
     return list
+
+def bglist(groupid):
+    list = []
+    # bg_xx.jpg
+    for index in range(groupstack[groupid], groupstack[groupid]+groupstep[groupid]):
+        tmpstr = groupstr[groupid] + str(index) + ".jpg"
+        # url, dir, id, groupid, suffix = False
+        list.append(imgName(tmpstr, index, groupid, 4))
+    return list
 def mkdir(path):
     tmppath = os.getcwd()+"\\"+path
     try:
@@ -279,6 +316,7 @@ def saveImg(imgData):
             raw.close()
             #update logic
             if(imgData.id>groupstack[imgData.groupid]):
+                print("update list " + groupdir[imgData.groupid])
                 groupstack[imgData.groupid] += groupstep[imgData.groupid]
                 simglist = []
                 if(imgData.suffix == 1):
@@ -287,6 +325,8 @@ def saveImg(imgData):
                     simglist = imglist2(imgData.groupid)
                 elif(imgData.suffix == 3):
                     simglist = imglist3(imgData.groupid)
+                elif(imgData.suffix == 4):
+                    simglist = bglist(imgData.groupid)
                 else:
                     print("wrong suffix")
 
@@ -327,7 +367,10 @@ def main():
                 print("download start from latest")
                 for i in range(0, numgroup):
                     groupstack[i] = int(data[i])
-                groupstack[7]-=50
+                # extra chara
+                groupstack[7]-=100
+                groupstack[23] -= 100
+                groupstack[24] -= 100
     except:
         pass
 
@@ -376,8 +419,23 @@ def main():
     for iimg in simglist:
         data_q.put(iimg)
     simglist.clear()
-    # quest extra
+    # quest lyria
     simglist = exlist()
+    for iimg in simglist:
+        data_q.put(iimg)
+    simglist.clear()
+    # top background
+    simglist = bglist(22)
+    for iimg in simglist:
+        data_q.put(iimg)
+    simglist.clear()
+    # book extra 399
+    simglist = imglist(23)
+    for iimg in simglist:
+        data_q.put(iimg)
+    simglist.clear()
+    # zoom extra 399
+    simglist = imglist(24)
     for iimg in simglist:
         data_q.put(iimg)
     simglist.clear()
@@ -385,7 +443,7 @@ def main():
     print("entire job took:", time.time()-start)
     # today = str(datetime.date.today())
     with open("log.txt", "w", encoding='utf-8') as logfile:
-        istr = "chara[R / SR / SSR / skin] quest[r / sr / ssr / extra] summon[n / r / sr / ssr] zoom[r / sr / ssr / skin] mypage[r / sr / ssr / skin] class cover\n"
+        istr = "chara[R / SR / SSR / skin] quest[r / sr / ssr / extra] summon[n / r / sr / ssr] zoom[r / sr / ssr / skin] mypage[r / sr / ssr / skin] class cover bg\n"
         logfile.write(istr)
         for ilog in grouptop:
             istr = str(ilog)+","

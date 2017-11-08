@@ -1,6 +1,6 @@
 GBF-Image
 ========================
-update: 2017/10/24
+update: 2017/11/08
 
 This is a downloader for GranBlue Fantasy(Cygames Inc.)
 * Language python 3.7
@@ -8,16 +8,17 @@ This is a downloader for GranBlue Fantasy(Cygames Inc.)
 ##### How to use
 * run in command line
 * smart start for the last download index(logged in log.txt in the same dir)
-* Please delete log.txt the first time you run the script。
+* Please delete log.txt the first time you run this script。
 * 如要下载完整图包，请删掉log.txt文件。
 ##### Download what
 * characters
 * class
 * summmon stones
-* quest(with emotion suffix)
+* quest(with emotion subfix)
 * skin
 * mypage
 ##### History Version
+* v3.2 2017/11/08 add 1 [top background],2 [zoom]&[b] of extra characters
 * v3.1 2017/10/24 update new job and skin address
 * v3.1 2017/09/09 update log.txt file 
 * v3 auto update to the latest resource
