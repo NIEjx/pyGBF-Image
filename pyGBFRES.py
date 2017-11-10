@@ -443,7 +443,7 @@ def main():
     print("entire job took:", time.time()-start)
     # today = str(datetime.date.today())
     with open("log.txt", "w", encoding='utf-8') as logfile:
-        istr = "chara[R / SR / SSR / skin] quest[r / sr / ssr / extra] summon[n / r / sr / ssr] zoom[r / sr / ssr / skin] mypage[r / sr / ssr / skin] class cover bg\n"
+        istr = "chara[R/SR/SSR/skin] quest[r/sr/ssr/extra] summon[n/r/sr/ssr] zoom[r/sr/ssr/skin] cover[r/sr/ssr/skin] class cover[class] bg chara[extra] zoom[extra]\n"
         logfile.write(istr)
         for ilog in grouptop:
             istr = str(ilog)+","
