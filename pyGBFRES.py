@@ -10,6 +10,7 @@ import datetime
 dirname = os.getcwd()
 print_lock = threading.Lock()
 data_q = Queue()
+SAVELINK = True
 
 # chara[R/SR/SSR/skin] quest[r/sr/ssr/extra] summon[n/r/sr/ssr] zoom[r/sr/ssr/skin] mypage[r/sr/ssr/skin] class cover bg chara[extra] zoom[extra]
 groupstack = [0,0,0,0,0,0,0,0,0,0,
@@ -59,6 +60,13 @@ groupstep = [20,20,20,20,
              20,20,20,20,
              0,0,50,100,
              100]
+grouplink = ["link\\b-r.txt","link\\b-sr.txt","link\\b-ssr.txt","link\\b-skin.txt",
+             "link\\quest-r.txt","link\\quest-sr.txt","link\\quest-ssr.txt","link\\quest-ex.txt",
+             "link\\smm-n.txt","link\\smm-r.txt","link\\smm-sr.txt","link\\smm-ssr.txt",
+             "link\\zoom-r.txt","link\\zoom-sr.txt","link\\zoom-ssr.txt","link\\zoom-skin.txt",
+             "link\\cover-r.txt","link\\cover-sr.txt","link\\cover-ssr.txt","link\\cover-skin.txt",
+             "link\\class.txt","link\\class.txt","link\\bg.txt",
+             "link\\b-ex.txt","link\\zoom-ex.txt"]
 
 MaxThread = 40
 
@@ -341,6 +349,11 @@ def saveImg(imgData):
                     file.write(img)
             else:
                 pass
+
+            if(SAVELINK):
+              with open(grouplink[groupid],"a") as linkfile:
+                linkfile.write(imgData.url+"\n")
+
         except:
             print("error:",imgName," in dir:",dir," not exist")
             pass

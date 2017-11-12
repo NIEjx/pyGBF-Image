@@ -1,6 +1,6 @@
 GBF-Image
 ========================
-update: 2017/11/08
+update: 2017/11/12
 
 This is a downloader for GranBlue Fantasy(Cygames Inc.)
 * Language python 3.7
@@ -18,6 +18,7 @@ This is a downloader for GranBlue Fantasy(Cygames Inc.)
 * skin
 * mypage
 ##### History Version
+* v3.2.1 2017/11/12 add download linkfile set
 * v3.2 2017/11/08 add 1 [top background],2 [zoom]&[b] of extra characters
 * v3.1 2017/10/24 update new job and skin address
 * v3.1 2017/09/09 update log.txt file 
