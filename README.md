@@ -9,7 +9,9 @@ This is a downloader for GranBlue Fantasy(Cygames Inc.)
 * run in command line
 * smart start for the last download index(logged in log.txt in the same dir)
 * Please delete log.txt the first time you run this script。
-* 如要下载完整图包，请删掉log.txt文件。
+* 如要下载完整图包，请删掉log.txt文件再运行脚本。
+* Any questions please check QA.md
+* 有任何疑问可以参考QA.md
 ##### Download what
 * characters
 * class
