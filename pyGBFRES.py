@@ -1,16 +1,19 @@
 # 批量下载GBF游戏资源
 from queue import Queue
 import os
+
 import time
 import threading
 import urllib.request
 import urllib.error
 import datetime
+import sys
 
 dirname = os.getcwd()
 print_lock = threading.Lock()
 data_q = Queue()
-SAVELINK = True
+SAVELINK = False
+DEBUG = False
 
 # chara[R/SR/SSR/skin] quest[r/sr/ssr/extra] summon[n/r/sr/ssr] zoom[r/sr/ssr/skin] mypage[r/sr/ssr/skin] class cover bg chara[extra] zoom[extra]
 groupstack = [0,0,0,0,0,0,0,0,0,0,
@@ -351,11 +354,18 @@ def saveImg(imgData):
                 pass
 
             if(SAVELINK):
-              with open(grouplink[groupid],"a") as linkfile:
-                linkfile.write(imgData.url+"\n")
+                #print(grouplink[imgData.groupid])
+                #print(imgData.url)
+                with open(grouplink[imgData.groupid],"a") as linkfile:
+                    linkfile.write(imgData.url+"\n")
 
-        except:
-            print("error:",imgName," in dir:",dir," not exist")
+        except OSError as err:
+            print("not exist!")
+            with open("err.txt","a",encoding='utf-8') as errfile:
+                errstr = "error:"+imgName+" in dir:"+dir+" not exist\n"
+                if(DEBUG):
+                    errstr += "  err " + str(format(err)) + "\n"
+                errfile.write(errstr)
             pass
 
 
@@ -368,6 +378,9 @@ def worker():
 
 def main():
     #socket.setdefaulttimeout(10)
+    if(sys.version_info.major != 3):
+        print("This script only works for python3")
+        return
     try:
         logdata = ""
         with open("log.txt") as logfile:
@@ -386,6 +399,7 @@ def main():
                 groupstack[24] -= 100
     except:
         pass
+
 
     for x in range(MaxThread):
         t = threading.Thread(target = worker)
@@ -466,6 +480,7 @@ def main():
 
 if __name__ == '__main__':
   main()
+  os.system("pause")
 
 #appendix
 #image set

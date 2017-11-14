@@ -112,3 +112,4 @@ http://game-a1.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/30200
 http://game-a1.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3020066000.png
 http://game-a1.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3020067000.png
 http://game-a1.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3020070000.png
+

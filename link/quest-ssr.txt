@@ -255,3 +255,4 @@ http://game-a1.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/30401
 http://game-a1.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3040138000_laugh2.png
 http://game-a1.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3040138000_sad.png
 http://game-a1.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3040138000_surprise.png
+

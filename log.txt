@@ -1,2 +1,2 @@
-chara[R / SR / SSR / skin] quest[r / sr / ssr / extra] summon[n / r / sr / ssr] zoom[r / sr / ssr / skin] mypage[r / sr / ssr / skin] class cover bg
-70,222,137,55,70,222,137,778,12,35,80,234,70,222,137,55,70,221,137,55,0,0,193,774,774,
+chara[R/SR/SSR/skin] quest[r/sr/ssr/extra] summon[n/r/sr/ssr] zoom[r/sr/ssr/skin] cover[r/sr/ssr/skin] class cover[class] bg chara[extra] zoom[extra]
+70,223,138,55,70,223,138,780,12,35,120,249,70,223,138,55,70,223,138,55,0,0,193,774,774,

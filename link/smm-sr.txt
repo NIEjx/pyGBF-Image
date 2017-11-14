@@ -94,3 +94,4 @@ http://game-a.granbluefantasy.jp/assets/img/sp/assets/summon/b/2030117000.png
 http://game-a.granbluefantasy.jp/assets/img/sp/assets/summon/b/2030118000.png
 http://game-a.granbluefantasy.jp/assets/img/sp/assets/summon/b/2030119000.png
 http://game-a.granbluefantasy.jp/assets/img/sp/assets/summon/b/2030120000.png
+

@@ -659,3 +659,4 @@ http://game-a1.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/30302
 http://game-a1.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3030223000_sad.png
 http://game-a1.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3030223000_serious.png
 http://game-a1.granbluefantasy.jp/assets/img/sp/quest/scene/character/body/3030223000_surprise.png
+

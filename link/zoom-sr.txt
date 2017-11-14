@@ -445,3 +445,5 @@ http://game-a.granbluefantasy.jp/assets/img/sp/assets/npc/zoom/3030222000_01.png
 http://game-a.granbluefantasy.jp/assets/img/sp/assets/npc/zoom/3030222000_02.png
 http://game-a.granbluefantasy.jp/assets/img/sp/assets/npc/zoom/3030223000_01.png
 http://game-a.granbluefantasy.jp/assets/img/sp/assets/npc/zoom/3030223000_02.png
+http://game-a.granbluefantasy.jp/assets/img/sp/assets/npc/zoom/3030223000_01.png
+http://game-a.granbluefantasy.jp/assets/img/sp/assets/npc/zoom/3030223000_02.png
