@@ -1,4 +1,4 @@
-# 批量下载GBF武器立绘
+# 下载器
 from queue import Queue
 import os
 

@@ -19,10 +19,10 @@ SAVELINK = False
 DEBUG = False
 
 # chara[R/SR/SSR/skin] quest[r/sr/ssr/extra] summon[n/r/sr/ssr] zoom[r/sr/ssr/skin] mypage[r/sr/ssr/skin] class cover bg chara[extra] zoom[extra]
-groupstack = [0,0,0,0,0,0,0,0,0,0,
-              0,0,0,0,0,0,0,0,0,0,
-              0,0,0,0,0,0,0,0,0,0,
-              0,0,0,0,0,0,0,0,0,0]
+groupstack = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+              -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+              -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+              -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,]
 grouptop =   [0,0,0,0,0,0,0,0,0,0,
               0,0,0,0,0,0,0,0,0,0,
               0,0,0,0,0,0,0,0,0,0,
@@ -46,8 +46,7 @@ MaxThread = 40
 def wpimglist(groupid):
     list = []
     # 3040001000_01
-    truegroup = groupid
-    for index in range(groupstack[groupid], groupstack[groupid]+groupstep[groupid]):
+    for index in range(groupstack[groupid]+1, groupstack[groupid]+1+groupstep[groupid]):
         list.append(imgName(index, groupid, 0))
     return list
 
@@ -79,17 +78,16 @@ def saveIndex(imgData):
         imgName = "10"+ groupstr[imgData.groupid] + str(imgData.id).zfill(3)+"00"
         iddir = imgData.groupid //10
         dir = groupdir[iddir]
-        print("downloading:" + imgName)
         count = 0
         try:
             url = prefix1 + "m/" + imgName +".jpg"
             if(download.saveImg(url,dir+"\\m")):
                 count+=1
-            if(SAVELINK):
-                #print(grouplink[imgData.groupid])
-                #print(imgData.url)
-                with open(grouplink[iddir],"a") as linkfile:
-                    linkfile.write(imgData.url+"\n")
+                if(SAVELINK):
+                    #print(grouplink[imgData.groupid])
+                    #print(imgData.url)
+                    with open(grouplink[iddir],"a") as linkfile:
+                        linkfile.write(url+"\n")
         except:
             pass
 
@@ -97,6 +95,11 @@ def saveIndex(imgData):
             url = prefix1 + "b/" + imgName +".png"
             if(download.saveImg(url,dir+"\\b")):
                 count+=1
+                if(SAVELINK):
+                    #print(grouplink[imgData.groupid])
+                    #print(imgData.url)
+                    with open(grouplink[iddir],"a") as linkfile:
+                        linkfile.write(url+"\n")
         except:
             pass
 
@@ -104,19 +107,25 @@ def saveIndex(imgData):
             url = prefix1 + "ls/" + imgName +".jpg"
             if(download.saveImg(url,dir+"\\ls")):
                 count+=1
+                if(SAVELINK):
+                    #print(grouplink[imgData.groupid])
+                    #print(imgData.url)
+                    with open(grouplink[iddir],"a") as linkfile:
+                        linkfile.write(url+"\n")
         except:
             pass
         #update logic
-        if(count >0 and imgData.id > groupstack[imgData.groupid]):
-            print("update list " + groupdir[iddir])
-            groupstack[imgData.groupid] += groupstep[imgData.groupid]
-            simglist = []
-            simglist = wpimglist(imgData.groupid)
-            for iimg in simglist:
-                data_q.put(iimg)
-            simglist.clear()
-        if(imgData.id>grouptop[imgData.groupid]):
-            grouptop[imgData.groupid] = imgData.id
+        if(count >0 ):
+            if(imgData.id > groupstack[imgData.groupid]):
+                print("update list " + groupdir[iddir])
+                groupstack[imgData.groupid] += groupstep[imgData.groupid]
+                simglist = []
+                simglist = wpimglist(imgData.groupid)
+                for iimg in simglist:
+                    data_q.put(iimg)
+                simglist.clear()
+            if(imgData.id>grouptop[imgData.groupid]):
+                grouptop[imgData.groupid] = imgData.id
 
 
 def worker():
@@ -133,7 +142,7 @@ def main():
         return
     try:
         logdata = ""
-        with open("weapon\\log.txt") as logfile:
+        with open("img\\weapon\\log.txt") as logfile:
             lines = logfile.readlines()
             logdata = lines[1]
         if (logdata != ""):
@@ -143,6 +152,7 @@ def main():
                 print("download start from latest")
                 for i in range(0, numgroup):
                     groupstack[i] = int(data[i])
+                    grouptop[i] = int(data[i])
     except:
         pass
 
@@ -157,6 +167,7 @@ def main():
         mkdir(idir+"\\m")
         mkdir(idir + "\\b")
         mkdir(idir + "\\ls")
+    mkdir("link")
 
     start = time.time()
     simglist = []
