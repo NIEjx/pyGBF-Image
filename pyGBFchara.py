@@ -38,12 +38,11 @@ grouplink = ["link\\chara-r.txt","link\\chara-sr.txt","link\\chara-ssr.txt","lin
              "link\\quest-r.txt","link\\quest-sr.txt","link\\quest-ssr.txt","","link\\quest-ex.txt",
              "link\\zoom-r.txt","link\\zoom-sr.txt","link\\zoom-ssr.txt","link\\zoom-skin.txt","link\\zoom-ex.txt",
              "link\\cover-r.txt","link\\cover-sr.txt","link\\cover-ssr.txt","link\\cover-skin.txt",""]
-explist = ["","_joy","_think","_mood",
-           "_laugh3","_laugh2","_laugh",
-           "_eye","_mortifying","_surprise_fe",
-           "_weak","_sad","_suddenly",
-           "_surprise","_angry","_cutin",
-           "_shy","_01","_02","_03"]
+explist = ["","_angry","_cutin","_eye",
+           "_joy","_laugh3","_laugh2","_laugh",
+           "_mood","_mortifying","_surprise_fe","_sad",
+           "_suddenly","_serious","_surprise","_shy",
+           "_think","_weak","_01","_02","_03"]
 suflist = ["_01","_02","_03"]
 MaxThread = 40
 

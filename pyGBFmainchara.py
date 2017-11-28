@@ -31,12 +31,11 @@ groupstr = ["3050000000",
             "3050001000",
             "3050001000_cockpit",
             "3050001000_race"]
-explist = ["","_joy","_think","_mood",
-           "_laugh3","_laugh2","_laugh",
-           "_eye","_mortifying","_surprise_fe",
-           "_weak","_sad","_suddenly",
-           "_surprise","_angry","_cutin",
-           "_shy","_01","_02","_03"]
+explist = ["","_angry","_cutin","_eye",
+           "_joy","_laugh3","_laugh2","_laugh",
+           "_mood","_mortifying","_surprise_fe","_sad",
+           "_suddenly","_serious","_surprise","_shy",
+           "_think","_weak","_01","_02","_03"]
 # chara[R/SR/SSR/skin] quest[r/sr/ssr/extra] summon[n/r/sr/ssr] zoom[r/sr/ssr/skin] mypage[r/sr/ssr/skin] class cover
 groupdir = ["img\\quest\\lyria"]
 grouplink = ["link\\quest-lyria.txt"]
